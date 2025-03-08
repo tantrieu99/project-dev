@@ -115,18 +115,42 @@ export default function Home() {
               onClick={() => setMenuOpen(!menuOpen)}
               className="text-white"
             >
-              xxx
+              <Image
+                src="/assets/icons/menu.png"
+                alt="menu"
+                className="w-10 h-10 object-cover"
+                width={50}
+                height={50}
+              />
             </button>
           )}
 
           {menuOpen && isMobile && (
-            <div className="absolute top-16 right-5 bg-black text-white p-5 rounded-lg shadow-lg flex flex-col gap-4">
-              {["About Us", "Games", "Partners", "Contact Us"].map((item) => (
-                <a key={item} href="#" className="hover:text-gray-300">
+            <div className="fixed overflow-hidden inset-0 z-50 bg-white text-black flex flex-col items-center pt-24">
+              {["ABOUT US", "GAMES", "PARTNERS", "CONTACT US"].map((item, index) => (
+                <a
+                  key={item}
+                  href="#"
+                  className={`text-center text-lg font-semibold hover:text-gray-300 w-[90%] py-6 ${index != 3 ? 'border-b-2 border-[#EEEEEE]' : ''}`}
+                >
                   {item}
                 </a>
               ))}
-              <Language />
+              <div className="absolute top-5 flex items-center justify-between w-full px-4">
+                <Language />
+                <button
+                  onClick={() => setMenuOpen(false)}
+                  className=" text-white text-2xl"
+                >
+                  <Image
+                    src="/assets/icons/close.png"
+                    alt="menu"
+                    className="w-10 h-10 object-cover"
+                    width={50}
+                    height={50}
+                  />
+                </button>
+              </div>
             </div>
           )}
         </div>

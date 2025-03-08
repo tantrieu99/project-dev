@@ -14,7 +14,7 @@ export default function Language() {
   return (
     <div className="relative">
       <button
-        className="flex items-center gap-2 text-white bg-opacity-20 rounded px-3 py-2 hover:bg-opacity-30"
+        className="flex items-center gap-2 text-white 2xl:bg-transparent bg-[#F6F6F6] 2xl:border-0 border border-[#AFAFAF] 2xl:rounded rounded-xl px-3 py-2 hover:bg-opacity-30"
         onClick={() => setIsOpen(!isOpen)}
       >
         <Image
@@ -28,11 +28,19 @@ export default function Language() {
           width={24}
           height={24}
           alt="Flag"
+          className="2xl:block hidden"
+        />
+        <Image
+          src={"/assets/icons/arrow-drop-down-black.png"}
+          width={24}
+          height={24}
+          alt="Flag"
+          className="2xl:hidden block"
         />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 bg-white rounded-lg shadow-lg w-40 px-2">
+        <div className="absolute 2xl:right-0 right-[-70px] mt-2 bg-white rounded-lg shadow-lg w-40 px-2">
           {languages.map((lang) => (
             <button
               key={lang.code}
