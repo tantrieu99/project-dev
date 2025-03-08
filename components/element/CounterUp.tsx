@@ -3,7 +3,7 @@ import CountUp from "react-countup";
 
 const Counter = ({ count }: { count: number }) => {
   return (
-    <div className="text-[80px] font-bold">
+    <div className="2xl:text-[80px] text-[40px] font-bold">
       <CountUp end={count} duration={2} />
     </div>
   );

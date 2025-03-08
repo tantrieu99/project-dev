@@ -19,7 +19,7 @@ const partners = [
 export default function PartnerSlider() {
   return (
     <div className="relative w-full max-w-5xl mx-auto">
-      <button className="custom-prev rounded-xl custom-button-slide absolute left-[-40px] top-1/2 transform -translate-y-1/2 z-10">
+      <button className="custom-prev rounded-xl custom-button-slide absolute 2xl:left-[-40px] left-8 top-1/2 transform -translate-y-1/2 z-10">
         <Image
           src="/assets/icons/left-slide.png"
           alt="Previous"
@@ -39,7 +39,8 @@ export default function PartnerSlider() {
         }}
         modules={[Navigation]}
         breakpoints={{
-          640: { slidesPerView: 2 },
+          0: { slidesPerView: 3 },
+          640: { slidesPerView: 3 },
           1024: { slidesPerView: 4 },
         }}
         className="flex items-center"
@@ -47,20 +48,20 @@ export default function PartnerSlider() {
         {partners.map((logo, index) => (
           <SwiperSlide
             key={index}
-            className="flex items-center justify-center h-[100px]"
+            className="flex items-center justify-center max-h-[200px]"
           >
             <Image
               src={logo}
               alt={`Partner ${index}`}
-              width={150}
+              width={188}
               height={80}
-              className="object-contain"
+              className="object-contain 2xl:w-[150px] 2xl:h-[80px] w-[188px] h-[72px]"
             />
           </SwiperSlide>
         ))}
       </Swiper>
 
-      <button className="custom-next rounded-xl custom-button-slide absolute right-[-40px] top-1/2 transform -translate-y-1/2 z-10">
+      <button className="custom-next rounded-xl custom-button-slide absolute 2xl:right-[-40px] right-8 top-1/2 transform -translate-y-1/2 z-10">
         <Image
           src="/assets/icons/right-slide.png"
           alt="Next"

@@ -21,6 +21,8 @@ export default function Home() {
   const ourGamesRef = useRef<HTMLDivElement | null>(null);
   const [isAboutUsVisible, setIsAboutUsVisible] = useState(false);
   const [isOurGamesVisible, setIsOurGamesVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (!aboutUsRef.current) return;
@@ -58,41 +60,78 @@ export default function Home() {
     return () => ourGamesObserver.disconnect();
   }, [isAboutUsVisible]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
-      <div className="relative bg-background text-white">
+      <div className="relative bg-background text-white overflow-x-hidden">
         <Image
           src="/assets/images/BG.png"
           alt="background"
-          className="w-full h-auto object-cover"
+          className="w-full h-auto object-cover 2xl:block hidden"
+          width={1920}
+          height={1018}
+        />
+        <Image
+          src="/assets/images/bg-mobile.png"
+          alt="background"
+          className="w-full h-auto object-cover block 2xl:hidden"
           width={1920}
           height={1018}
         />
         <Image
           src="/assets/images/Fairy.png"
           alt="background"
-          className="absolute w-[838px] h-auto object-cover left-0 bottom-0"
+          className="absolute 2xl:w-[838px] w-[300px] h-auto object-cover 2xl:left-0 left-20 right-0 2xl:bottom-0 bottom-4"
           width={838}
           height={838}
         />
 
-        <div className="absolute left-0 top-0 flex items-center justify-between w-full px-20 mt-5">
+        <div className="absolute left-0 top-0 flex items-center justify-between w-full px-4 lg:px-20 mt-5">
           <img
             src="/assets/images/white_logo.png"
             alt="logo"
-            className="w-[109px] h-[64px] object-cover"
+            className="2xl:w-[109px] 2xl:h-[64px] w-[68px] h-10 object-cover"
           />
-          <div className="flex items-center gap-20 text-white font-semibold uppercase text-sm">
-            {["About Us", "Games", "Partners", "Contact Us"].map((item) => (
-              <a key={item} href="#" className="hover:text-gray-300">
-                {item}
-              </a>
-            ))}
-            <Language />
-          </div>
+
+          {!isMobile ? (
+            <div className="flex items-center gap-10 lg:gap-20 text-white font-semibold uppercase text-sm">
+              {["About Us", "Games", "Partners", "Contact Us"].map((item) => (
+                <a key={item} href="#" className="hover:text-gray-300">
+                  {item}
+                </a>
+              ))}
+              <Language />
+            </div>
+          ) : (
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="text-white"
+            >
+              xxx
+            </button>
+          )}
+
+          {menuOpen && isMobile && (
+            <div className="absolute top-16 right-5 bg-black text-white p-5 rounded-lg shadow-lg flex flex-col gap-4">
+              {["About Us", "Games", "Partners", "Contact Us"].map((item) => (
+                <a key={item} href="#" className="hover:text-gray-300">
+                  {item}
+                </a>
+              ))}
+              <Language />
+            </div>
+          )}
         </div>
 
-        <div className="absolute inset-0 flex flex-col top-[294px] items-center">
+        <div className="absolute inset-0 flex flex-col 2xl:top-[294px] top-24 items-center">
           <CountDown />
         </div>
         <ScrollButton />
@@ -120,7 +159,7 @@ export default function Home() {
         )}
       </div>
 
-      <div className="mt-[246px] bg-[#F6F6F6] py-[120px]">
+      <div className="2xl:mt-[246px] mt-20 bg-[#F6F6F6] 2xl:py-[120px] py-10">
         <Partners />
       </div>
 

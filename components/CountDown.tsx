@@ -38,8 +38,11 @@ export default function CountDown() {
 
   return (
     <div className="flex flex-col items-center space-y-5">
-      <h1 className="font-playfair text-[80px] font-black text-center">
+      <h1 className="font-playfair text-[80px] font-black text-center 2xl:block hidden">
         We’re Getting Ready
+      </h1>
+      <h1 className="font-playfair text-[40px] font-black text-center 2xl:hidden block">
+        We’re <br/> Getting Ready
       </h1>
       <div className="bg-white z-10 px-8 py-4 rounded-2xl shadow-2xl flex items-center justify-center mt-5">
         {Object.entries(timeLeft).map(([label, value], index, array) => (
@@ -51,16 +54,16 @@ export default function CountDown() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 10, opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="text-[60px] font-black font-playfair text-[#000000] mt-[-22px]"
+                className="2xl:text-[60px] text-[36px] font-black font-playfair text-[#000000] mt-[-22px]"
               >
                 {value}
               </motion.div>
-              <span className="text-[#000000] font-bold text-base capitalize">
+              <span className="text-[#000000] font-bold 2xl:text-base text-xs capitalize">
                 {label}
               </span>
             </div>
             {index < array.length - 1 && (
-              <span className="text-[60px] font-normal font-playfair text-[#000000] mx-16 mb-8">
+              <span className="2xl:text-[60px] text-[36px] font-normal font-playfair text-[#000000] 2xl:mx-16 mx-3 mb-8">
                 :
               </span>
             )}
@@ -68,12 +71,12 @@ export default function CountDown() {
         ))}
       </div>
 
-      <span className="text-center text-lg !mt-24 z-10">
+      <span className="text-center 2xl:text-lg text-xs !2xl:mt-24 mt-10 z-10 2xl:px-0 px-4">
         We will back to something amazing. Getting the latest <br /> updates
         about our games. Please sign up to our newsletter.
       </span>
 
-      <div className="relative w-full max-w-xl z-10">
+      <div className="relative w-full max-w-xl z-10 2x:px-0 px-4">
         <div className="relative flex items-center bg-white p-3 rounded-2xl shadow-xl">
           <input
             type="email"

@@ -7,12 +7,19 @@ export default function Footer() {
         <Image
           src="/assets/images/bg-footer.png"
           alt="background"
-          className="w-full h-auto object-cover"
+          className="w-full h-auto object-cover 2xl:block hidden"
           width={1920}
           height={446}
         />
-        <div className="absolute left-0 top-[104px] flex items-start w-full px-[230px] mt-5">
-          <div className="w-1/3 flex flex-col justify-center">
+        <Image
+          src="/assets/images/bg-footer-mobile.png"
+          alt="background"
+          className="w-full h-auto object-cover block 2xl:hidden"
+          width={1920}
+          height={446}
+        />
+        <div className="absolute left-0 2xl:top-[104px] top-10 2xl:flex items-start w-full 2xl:px-[230px] 2xl:mt-5">
+          <div className="2xl:w-1/3 flex flex-col justify-center items-center">
             <img
               src="/assets/images/logo-footer.png"
               alt="logo"
@@ -36,9 +43,9 @@ export default function Footer() {
               />
             </div>
           </div>
-          <div className="w-1/3 flex flex-col justify-center mr-5">
+          <div className="2xl:w-1/3 flex flex-col justify-center mr-5 2xl:px-0 px-4 2xl:mt-0 mt-16">
             <div className="text-2xl font-bold">Address</div>
-            <div className="mt-10 flex items-start">
+            <div className="2xl:mt-10 mt-5 flex items-start">
               <img
                 src="/assets/icons/location.png"
                 alt="facebook"
@@ -56,7 +63,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="mt-10 flex items-center">
+            <div className="2xl:mt-10 mt-5 flex items-center">
               <img
                 src="/assets/icons/mobile.png"
                 alt="facebook"
@@ -68,9 +75,9 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="w-1/3 flex flex-col justify-start ml-5">
+          <div className="2xl:w-1/3 flex flex-col justify-start ml-5 2xl:mt-0 mt-16">
             <div className="text-2xl font-bold">Subscribe</div>
-            <div className="mt-10 text-sm">
+            <div className="2xl:mt-10 mt-5 text-sm">
               Subscribe to our newsletter and be the first to know about our
               updates
             </div>

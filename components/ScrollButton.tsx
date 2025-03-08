@@ -25,7 +25,7 @@ export default function ScrollButton() {
   return (
     <button
       onClick={handleClick}
-      className="fixed z-20 bottom-5 right-5 px-4 py-5 shadow-button transition-all"
+      className="fixed z-20 bottom-5 right-5 2xl:px-4 2xl:py-5 px-2 py-3 shadow-button transition-all 2xl:w-[67px] 2xl:h-[67px] w-[47px] h-[47px]"
     >
       <Image
         src={"/assets/icons/icon-down.png"}

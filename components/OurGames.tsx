@@ -80,19 +80,25 @@ const games = [
 export default function OurGames() {
   return (
     <div className="fadeInUp">
-      <div className="font-playfair text-6xl font-black text-center">
+      <div className="font-playfair 2xl:text-6xl text-[40px] font-black text-center">
         Our Games
       </div>
-      <div className="text-sm text-[#757575] text-center mt-6">
+      <div className="text-sm text-[#757575] text-center mt-6 2xl:block hidden">
         As a pioneer of mobile app gamification, we take pride in originality
         and individuality, providing global players with <br /> state-of-the-art
         games that feature splendid storylines, sensational sound effects and
         magnificent animation that never
         <br /> cease to impress.
       </div>
+      <div className="text-sm text-[#757575] text-center mt-6 px-4 2xl:hidden block">
+        As a pioneer of mobile app gamification, we take pride in originality
+        and individuality, providing global players with state-of-the-art games
+        that feature splendid storylines, sensational sound effects and
+        magnificent animation that never cease to impress.
+      </div>
 
-      <div className="min-h-screen flex items-center justify-center mt-20">
-        <div className="grid grid-cols-4 gap-x-10 gap-y-10 auto-rows-auto game-grid">
+      <div className="min-h-screen flex items-center justify-center 2xl:mt-20 mt-10">
+        <div className="grid 2xl:grid-cols-4 grid-cols-2 2xl:gap-x-10 2xl:gap-y-10 gap-x-5 gap-y-5 auto-rows-auto game-grid">
           {games.map((game, index) => (
             <div key={index} className="game-card">
               <Card {...game} />
