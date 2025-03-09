@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { translations } from "./element/translation";
 
 export default function CountDown() {
   const [timeLeft, setTimeLeft] = useState({
@@ -10,6 +11,12 @@ export default function CountDown() {
     minutes: 0,
     seconds: 0,
   });
+  const [language, setLanguage] = useState<string>("en");
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem("language") || "en";
+    setLanguage(storedLang);
+  }, []);
 
   useEffect(() => {
     const targetDate = new Date();
@@ -39,10 +46,12 @@ export default function CountDown() {
   return (
     <div className="flex flex-col items-center space-y-5">
       <h1 className="font-playfair text-[80px] font-black text-center 2xl:block hidden">
-        We’re Getting Ready
+        {translations[language].gettingReady}
       </h1>
       <h1 className="font-playfair text-[40px] font-black text-center 2xl:hidden block">
-        We’re <br/> Getting Ready
+        {translations[language].gettingReadyMobile1}
+        <br />
+        {translations[language].gettingReadyMobile2}
       </h1>
       <div className="bg-white z-10 px-8 py-4 rounded-2xl shadow-2xl flex items-center justify-center mt-5">
         {Object.entries(timeLeft).map(([label, value], index, array) => (
@@ -59,7 +68,13 @@ export default function CountDown() {
                 {value}
               </motion.div>
               <span className="text-[#000000] font-bold 2xl:text-base text-xs capitalize">
-                {label}
+                {label == "days"
+                  ? translations[language].days
+                  : label == "hours"
+                  ? translations[language].hours
+                  : label == "minutes"
+                  ? translations[language].minutes
+                  : translations[language].seconds}
               </span>
             </div>
             {index < array.length - 1 && (
@@ -71,16 +86,17 @@ export default function CountDown() {
         ))}
       </div>
 
-      <span className="text-center 2xl:text-lg text-xs !2xl:mt-24 mt-10 z-10 2xl:px-0 px-4">
-        We will back to something amazing. Getting the latest <br /> updates
-        about our games. Please sign up to our newsletter.
-      </span>
+      <div className="text-center 2xl:text-lg text-xs 2xl:!mt-24 mt-10 z-10 2xl:px-0 px-4">
+        {translations[language].weWill1}
+        <br />
+        {translations[language].weWill2}
+      </div>
 
       <div className="relative w-full max-w-xl z-10 2x:px-0 px-4">
         <div className="relative flex items-center bg-white p-3 rounded-2xl shadow-xl">
           <input
             type="email"
-            placeholder="Enter your email"
+            placeholder={translations[language].enterEmail}
             className="flex-1 outline-none bg-transparent text-[#000000] placeholder-[#545454] px-4 py-1"
           />
           <button className="p-2">

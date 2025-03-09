@@ -2,21 +2,25 @@
 import Image from "next/image";
 import Counter from "./element/CounterUp";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { translations } from "./element/translation";
 
 export default function AboutUs() {
+  const [language, setLanguage] = useState<string>("en");
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem("language") || "en";
+    setLanguage(storedLang);
+  }, []);
   return (
     <div className="fadeInDown">
       <div className="2xl:px-96 2xl:flex items-stretch 2xl:mt-32 mt-12 h-full w-full">
         <div className="2xl:w-1/2 2xl:px-0 px-4 mr-5 fadeInLeft  flex flex-col">
-          <div className="font-playfair 2xl:text-6xl text-[40px] font-black">About Us</div>
+          <div className="font-playfair 2xl:text-6xl text-[40px] font-black">
+            {translations[language].about}
+          </div>
           <div className="2xl:mt-10 mt-4 text-sm text-[#757575]">
-            {`Browse our selection of free online games and have a great time
-          without leaving the site! Our Kids Games option also includes game
-          reviews, extensive game cheats and walkthroughs, and much more. We
-          have exclusive free downloads, videos, and articles as well. Etech
-          reviews the most popular kids games from all the most popular video
-          gaming platforms, so you don’t need to search around for fun anywhere
-          else on the Internet. Explore a whole new world of gaming on Etech.`}
+            {translations[language].desAbout}
           </div>
           <div className="2xl:block flex items-center 2xl:mt-0 mt-10">
             <div className="">
@@ -27,18 +31,19 @@ export default function AboutUs() {
                 </span>
                 <span className="2xl:text-[80px] text-[40px] font-bold">+</span>
               </div>
-              <div className="text-2xl font-bold">Users</div>
+              <div className="text-2xl font-bold">
+                {translations[language].users}
+              </div>
             </div>
 
             <div className="2xl:ml-0 ml-14">
               <div className="flex items-end text-[#079BEE] 2xl:mt-10">
                 <Counter count={135} />
-                <span className="2xl:text-[40px] text-[20px] font-bold 2xl:mb-4 mb-2">
-                  M
-                </span>
                 <span className="2xl:text-[80px] text-[40px] font-bold">+</span>
               </div>
-              <div className="text-2xl font-bold">Games</div>
+              <div className="text-2xl font-bold">
+                {translations[language].games}
+              </div>
             </div>
           </div>
         </div>
@@ -55,10 +60,11 @@ export default function AboutUs() {
               />
             </div>
             <div>
-              <div className="text-2xl font-bold">24 - Hour</div>
+              <div className="text-2xl font-bold">
+                {translations[language].hour24}
+              </div>
               <div className="text-sm text-[#757575]">
-                24/7 access ensures operators' businesses runs smoothly all year
-                long.
+                {translations[language].desHour24}
               </div>
             </div>
           </div>
@@ -74,11 +80,11 @@ export default function AboutUs() {
               />
             </div>
             <div>
-              <div className="text-2xl font-bold">Design</div>
+              <div className="text-2xl font-bold">
+                {translations[language].design}
+              </div>
               <div className="text-sm text-[#757575]">
-                Combining imaginative universes, play dynamics, and
-                unprecedented gameplay, our games transcend the boundaries of
-                the virtual world by weaving innovative gameplay.
+                {translations[language].desDesign}
               </div>
             </div>
           </div>
@@ -94,11 +100,11 @@ export default function AboutUs() {
               />
             </div>
             <div>
-              <div className="text-2xl font-bold">Team</div>
+              <div className="text-2xl font-bold">
+                {translations[language].team}
+              </div>
               <div className="text-sm text-[#757575]">
-                Etech is an award-winning, international studio of designers,
-                artists, animators and producers that create content for the
-                biggest names in film and video games.
+                {translations[language].desTeam}
               </div>
             </div>
           </div>

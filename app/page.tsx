@@ -8,6 +8,7 @@ import ScrollButton from "@/components/ScrollButton";
 import Image from "next/image";
 import Partners from "@/components/Partners";
 import Footer from "@/components/Footer";
+import { translations } from "@/components/element/translation";
 
 const LazyAboutUs = dynamic(() => import("@/components/AboutUs"), {
   ssr: false,
@@ -23,6 +24,13 @@ export default function Home() {
   const [isOurGamesVisible, setIsOurGamesVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const [language, setLanguage] = useState<string>("en");
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem("language") || "en";
+    setLanguage(storedLang);
+  }, []);
 
   useEffect(() => {
     if (!aboutUsRef.current) return;
@@ -75,14 +83,14 @@ export default function Home() {
         <Image
           src="/assets/images/BG.png"
           alt="background"
-          className="w-full h-auto object-cover 2xl:block hidden"
+          className="w-full h-auto object-cover 2xl:block xl:block md:block hidden"
           width={1920}
           height={1018}
         />
         <Image
           src="/assets/images/bg-mobile.png"
           alt="background"
-          className="w-full h-auto object-cover block 2xl:hidden"
+          className="w-full h-auto object-cover block 2xl:hidden xl:hidden md:hidden"
           width={1920}
           height={1018}
         />
@@ -103,7 +111,7 @@ export default function Home() {
 
           {!isMobile ? (
             <div className="flex items-center gap-10 lg:gap-20 text-white font-semibold uppercase text-sm">
-              {["About Us", "Games", "Partners", "Contact Us"].map((item) => (
+              {[translations[language].about, translations[language].games, translations[language].partners, translations[language].contact].map((item) => (
                 <a key={item} href="#" className="hover:text-gray-300">
                   {item}
                 </a>
@@ -127,15 +135,19 @@ export default function Home() {
 
           {menuOpen && isMobile && (
             <div className="fixed overflow-hidden inset-0 z-50 bg-white text-black flex flex-col items-center pt-24">
-              {["ABOUT US", "GAMES", "PARTNERS", "CONTACT US"].map((item, index) => (
-                <a
-                  key={item}
-                  href="#"
-                  className={`text-center text-lg font-semibold hover:text-gray-300 w-[90%] py-6 ${index != 3 ? 'border-b-2 border-[#EEEEEE]' : ''}`}
-                >
-                  {item}
-                </a>
-              ))}
+              {["ABOUT US", "GAMES", "PARTNERS", "CONTACT US"].map(
+                (item, index) => (
+                  <a
+                    key={item}
+                    href="#"
+                    className={`text-center text-lg font-semibold hover:text-gray-300 w-[90%] py-6 ${
+                      index != 3 ? "border-b-2 border-[#EEEEEE]" : ""
+                    }`}
+                  >
+                    {item}
+                  </a>
+                )
+              )}
               <div className="absolute top-5 flex items-center justify-between w-full px-4">
                 <Language />
                 <button
@@ -155,7 +167,7 @@ export default function Home() {
           )}
         </div>
 
-        <div className="absolute inset-0 flex flex-col 2xl:top-[294px] top-24 items-center">
+        <div className="absolute inset-0 flex flex-col 2xl:top-[294px] md:top-0 top-24 items-center">
           <CountDown />
         </div>
         <ScrollButton />

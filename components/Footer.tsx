@@ -1,6 +1,15 @@
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { translations } from "./element/translation";
 
 export default function Footer() {
+  const [language, setLanguage] = useState<string>("en");
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem("language") || "en";
+    setLanguage(storedLang);
+  }, []);
+
   return (
     <>
       <div className="relative bg-background text-white">
@@ -14,7 +23,7 @@ export default function Footer() {
         <Image
           src="/assets/images/bg-footer-mobile.png"
           alt="background"
-          className="w-full h-auto object-cover block 2xl:hidden"
+          className="w-full h-auto object-cover block 2xl:hidden md:h-[720px]"
           width={1920}
           height={446}
         />
@@ -44,7 +53,9 @@ export default function Footer() {
             </div>
           </div>
           <div className="2xl:w-1/3 flex flex-col justify-center mr-5 2xl:px-0 px-4 2xl:mt-0 mt-16">
-            <div className="text-2xl font-bold">Address</div>
+            <div className="text-2xl font-bold">
+              {translations[language].address}
+            </div>
             <div className="2xl:mt-10 mt-5 flex items-start">
               <img
                 src="/assets/icons/location.png"
@@ -52,14 +63,8 @@ export default function Footer() {
                 className="w-10 h-10 object-cover mr-6"
               />
               <div className="text-sm">
-                <div>
-                  Valletta Buildings, South Street, Valletta - VLT 1103 Malta,
-                  US
-                </div>
-                <div className="mt-3">
-                  20 Phan Dang Luu street, Hai Chau District, Danang city,
-                  Vietnam
-                </div>
+                <div>{translations[language].address1}</div>
+                <div className="mt-3">{translations[language].address2}</div>
               </div>
             </div>
 
@@ -70,23 +75,26 @@ export default function Footer() {
                 className="w-10 h-10 object-cover mr-6"
               />
               <div className="text-sm">
-                <div>(+1) 555-0108-000 or (+236) 555-0108</div>
+                <div>
+                  (+1) 555-0108-000 {translations[language].or} (+236) 555-0108
+                </div>
               </div>
             </div>
           </div>
 
           <div className="2xl:w-1/3 flex flex-col justify-start ml-5 2xl:mt-0 mt-16">
-            <div className="text-2xl font-bold">Subscribe</div>
+            <div className="text-2xl font-bold">
+              {translations[language].subscribe}
+            </div>
             <div className="2xl:mt-10 mt-5 text-sm">
-              Subscribe to our newsletter and be the first to know about our
-              updates
+              {translations[language].desSubscribe}
             </div>
 
             <div className="relative w-full max-w-xl z-10 mt-3">
               <div className="relative flex items-center bg-transparent border border-[#FFFFFF] p-3 rounded-2xl shadow-xl">
                 <input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder={translations[language].enterEmail}
                   className="flex-1 outline-none bg-transparent text-white placeholder-white px-4 py-1"
                 />
                 <button className="p-2">

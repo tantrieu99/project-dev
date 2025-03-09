@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Card from "./element/Card";
+import { translations } from "./element/translation";
 
 const games = [
   {
@@ -78,23 +80,27 @@ const games = [
 ];
 
 export default function OurGames() {
+  const [language, setLanguage] = useState<string>("en");
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem("language") || "en";
+    setLanguage(storedLang);
+  }, []);
+
   return (
     <div className="fadeInUp">
       <div className="font-playfair 2xl:text-6xl text-[40px] font-black text-center">
-        Our Games
+        {translations[language].ourGames}
       </div>
       <div className="text-sm text-[#757575] text-center mt-6 2xl:block hidden">
-        As a pioneer of mobile app gamification, we take pride in originality
-        and individuality, providing global players with <br /> state-of-the-art
-        games that feature splendid storylines, sensational sound effects and
-        magnificent animation that never
-        <br /> cease to impress.
+        {translations[language].desOurGames1}
+        <br />
+        {translations[language].desOurGames2}
+        <br />
+        {translations[language].desOurGames3}
       </div>
       <div className="text-sm text-[#757575] text-center mt-6 px-4 2xl:hidden block">
-        As a pioneer of mobile app gamification, we take pride in originality
-        and individuality, providing global players with state-of-the-art games
-        that feature splendid storylines, sensational sound effects and
-        magnificent animation that never cease to impress.
+        {translations[language].desOurGames}
       </div>
 
       <div className="min-h-screen flex items-center justify-center 2xl:mt-20 mt-10">

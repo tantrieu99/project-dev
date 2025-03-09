@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function Language() {
@@ -10,6 +10,20 @@ export default function Language() {
     { code: "vi", name: "Vietnamese", flag: "/assets/icons/vn.png" },
     { code: "en", name: "English", flag: "/assets/icons/us.png" },
   ];
+
+  // Lấy ngôn ngữ từ localStorage khi component mount
+  useEffect(() => {
+    const savedLang = localStorage.getItem("language") || "en";
+    setLanguage(savedLang);
+  }, []);
+
+  // Hàm thay đổi ngôn ngữ
+  const changeLanguage = (lang: string) => {
+    localStorage.setItem("language", lang);
+    setLanguage(lang);
+    setIsOpen(false);
+    window.location.reload(); // Reload để áp dụng thay đổi
+  };
 
   return (
     <div className="relative">
@@ -27,14 +41,14 @@ export default function Language() {
           src={"/assets/icons/arrow-drop-down.png"}
           width={24}
           height={24}
-          alt="Flag"
+          alt="Dropdown"
           className="2xl:block hidden"
         />
         <Image
           src={"/assets/icons/arrow-drop-down-black.png"}
           width={24}
           height={24}
-          alt="Flag"
+          alt="Dropdown"
           className="2xl:hidden block"
         />
       </button>
@@ -44,20 +58,12 @@ export default function Language() {
           {languages.map((lang) => (
             <button
               key={lang.code}
-              className={`flex items-center w-full py-2 hover:bg-gray-100 ${lang.code == 'vi' ? 'border-b-2 border-[#C4C4C4]' : ''}`}
-              onClick={() => {
-                setLanguage(lang.code);
-                setIsOpen(false);
-              }}
+              className={`flex items-center w-full py-2 hover:bg-gray-100 ${lang.code == "vi" ? "border-b-2 border-[#C4C4C4]" : ""}`}
+              onClick={() => changeLanguage(lang.code)}
             >
               <div className="flex-shrink-0 mr-2 w-6">
                 {language === lang.code && (
-                  <Image
-                    src={"/assets/icons/tick.png"}
-                    width={24}
-                    height={24}
-                    alt="tick"
-                  />
+                  <Image src={"/assets/icons/tick.png"} width={24} height={24} alt="tick" />
                 )}
               </div>
               <div className="flex items-center gap-2">
